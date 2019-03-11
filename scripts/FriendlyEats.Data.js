@@ -21,32 +21,50 @@ FriendlyEats.prototype.addRestaurant = function(data) {
   */
 };
 
-FriendlyEats.prototype.getAllRestaurants = function(renderer) {
-  /*
-    TODO: Retrieve list of restaurants
-  */
+FriendlyEats.prototype.getAllUsers = function(renderer) {
+  var query = firebase.firestore()
+  .collection('Users')
+  .orderBy('Responding')
+  .limit(50);
+
+this.getDocumentsInQuery(query, renderer);
 };
 
 FriendlyEats.prototype.getDocumentsInQuery = function(query, renderer) {
-  /*
-    TODO: Render all documents in the provided query
-  */
+  query.onSnapshot(function(snapshot) {
+    if (!snapshot.size) return renderer.empty(); // Display "There are no users".
+    
+   
+    snapshot.docChanges().forEach(function(change) {
+      if (change.type === 'removed') {
+        renderer.remove(change.doc);
+      } else {
+      
+        renderer.display(change.doc);
+
+        if (!change.doc.data().Responding) {
+            document.getElementById('doc-' + change.doc.id).style.backgroundColor = "Red"
+
+        }
+      }
+    });
+  });
 };
 
 FriendlyEats.prototype.getRestaurant = function(id) {
+  FriendlyEats.prototype.getRestaurant = function(id) {
+    return firebase.firestore().collection('Users').doc(id).get();
+  };
+};
+
+FriendlyEats.prototype.getFilteredUsers = function(filters, renderer) {
   /*
-    TODO: Retrieve a single restaurant
+    TODO: Retrieve filtered list of users
   */
 };
 
-FriendlyEats.prototype.getFilteredRestaurants = function(filters, renderer) {
+FriendlyEats.prototype.addRating = function(userID, rating) {
   /*
-    TODO: Retrieve filtered list of restaurants
-  */
-};
-
-FriendlyEats.prototype.addRating = function(restaurantID, rating) {
-  /*
-    TODO: Retrieve add a rating to a restaurant
+    TODO: Retrieve add a rating to a user
   */
 };

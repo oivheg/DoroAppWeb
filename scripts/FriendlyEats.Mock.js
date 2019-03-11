@@ -16,9 +16,9 @@
 'use strict';
 
 /**
- * Adds a set of mock Restaurants to the Cloud Firestore.
+ * Adds a set of mock Users to the Cloud Firestore.
  */
-FriendlyEats.prototype.addMockRestaurants = function() {
+FriendlyEats.prototype.addMockUsers = function() {
   var promises = [];
 
   for (var i = 0; i < 20; i++) {
@@ -35,7 +35,7 @@ FriendlyEats.prototype.addMockRestaurants = function() {
     var avgRating = 0;
 
     var promise = this.addRestaurant({
-      name: name,
+      name: "test",
       category: category,
       price: price,
       city: city,
@@ -58,7 +58,7 @@ FriendlyEats.prototype.addMockRestaurants = function() {
 /**
  * Adds a set of mock Ratings to the given Restaurant.
  */
-FriendlyEats.prototype.addMockRatings = function(restaurantID) {
+FriendlyEats.prototype.addMockRatings = function(userID) {
   var ratingPromises = [];
   for (var r = 0; r < 5*Math.random(); r++) {
     var rating = this.data.ratings[
@@ -67,7 +67,7 @@ FriendlyEats.prototype.addMockRatings = function(restaurantID) {
     rating.userName = 'Bot (Web)';
     rating.timestamp = new Date();
     rating.userId = firebase.auth().currentUser.uid;
-    ratingPromises.push(this.addRating(restaurantID, rating));
+    ratingPromises.push(this.addRating(userID, rating));
   }
   return Promise.all(ratingPromises);
 };

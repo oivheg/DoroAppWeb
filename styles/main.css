@@ -28,6 +28,7 @@
  #cards .rating .material-icons {font-size: 24px;}
  
  #cards .details {
+   /* color: rgb(245, 31, 31); */
    color: #aaa;
    width: 100%;
    clear: both;
@@ -215,7 +216,7 @@
  .mdc-card {min-height: 0;}
  
  .mdc-card {
-   background: linear-gradient(white, #f9f9f9);
+   /* background: linear-gradient(white, #f9f9f9); */
    justify-content: space-between;
  }
  
@@ -373,15 +374,15 @@
    margin-top: 170px;
  }
  
- #restaurant-header {
+ #user-header {
    padding-bottom: 30px;
  }
  
- #restaurant-header .content {
+ #user-header .content {
    padding-top: 246px;
  }
  
- #restaurant-header header {
+ #user-header header {
    box-shadow: rgba(0, 0, 0, .2) 0px 2px 2px;
  }
  
@@ -395,7 +396,7 @@
    width: 100%;
  }
  
- #restaurant-header > header > .content {
+ #user-header > header > .content {
    width: 100%;
    clear: both;
  }
@@ -410,11 +411,11 @@
    text-align: left;
  }
  
- #restaurant-header .info {
+ #user-header .info {
    height: 76px;
  }
  
- #restaurant-header .mdc-layout-grid {
+ #user-header .mdc-layout-grid {
    --mdc-layout-grid-margin-desktop: 0px 10px 0px 10px;
    --mdc-layout-grid-margin-tablet: 0px 10px 0px 10px;
    --mdc-layout-grid-margin-phone: 0px 10px 0px 10px;
@@ -449,30 +450,30 @@
    /* IE6-9 */
  }
  
- #restaurant-header .details {
+ #user-header .details {
    color: white;
    font-size: 14px;
  }
  
- #restaurant-header h2 {
+ #user-header h2 {
    font-size: 22px;
    color: white;
    margin: 0px;
    display: inline;
  }
  
- #restaurant-header .price {
+ #user-header .price {
    color: white;
    position: relative;
    left: 5px;
    top: -1px;
  }
  
- #restaurant-header #rating {
+ #user-header #rating {
    padding-top: 4px;
  }
  
- #restaurant-header #rating .material-icons {
+ #user-header #rating .material-icons {
    color: white;
    font-size: 20px;
    position: relative;
@@ -480,7 +481,7 @@
    font-size: 18px;
  }
  
- #restaurant-header .fab {
+ #user-header .fab {
    min-width: 0px;
    box-shadow: rgba(0, 0, 0, 0.2) 3px 3px 2px;
    border-radius: 100%;

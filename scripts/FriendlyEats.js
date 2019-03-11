@@ -60,7 +60,7 @@ FriendlyEats.prototype.initRouter = function() {
       }
     })
     .on({
-      '/restaurants/*': function() {
+      '/users/*': function() {
         var path = that.getCleanPath(document.location.pathname);
         var id = path.split('/')[2];
         that.viewRestaurant(id);
@@ -70,7 +70,7 @@ FriendlyEats.prototype.initRouter = function() {
 
   firebase
     .firestore()
-    .collection('restaurants')
+    .collection('users')
     .limit(1)
     .onSnapshot(function(snapshot) {
       if (snapshot.empty) {

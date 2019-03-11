@@ -17,7 +17,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Learn how to use the Firebase platform on the Web">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FriendlyEats</title>
+  <title>DoroDashboard</title>
 
   <!-- Disable tap highlight on IE -->
   <meta name="msapplication-tap-highlight" content="no">
@@ -63,8 +63,8 @@
       <header id="site-header" class="mdc-toolbar mdc-toolbar--fixed">
         <div id="title" class="mdc-toolbar__row mdc-layout-grid">
           <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-            <span class="material-icons mdc-toolbar__icon--menu">restaurant</span>
-            <span class="mdc-toolbar__title">FriendlyEats</span>
+            <span class="material-icons mdc-toolbar__icon--menu">user</span>
+            <span class="mdc-toolbar__title">DoroDashboard</span>
           </section>
         </div>
         <div id="section-header" data-fir-if="hasSectionHeader"></div>
@@ -83,13 +83,13 @@
     </div>
   </div>
 
-  <div hidden class="template" id="no-restaurants">
+  <div hidden class="template" id="no-users">
     <div id="guy-container" class="mdc-toolbar-fixed-adjust">
       <img class="guy" src="/images/guy_fireats.png" />
       <div class="text">
         This app is connected to the Firebase project "<b data-fir-content="projectId"></b>".<br />
         <br />
-        Your Cloud Firestore has no documents in <b>/restaurants/</b>.
+        Your Cloud Firestore has no documents in <b>/users/</b>.
       </div>
       <br />
       <a class="mdc-button" id="add_mock_data">
@@ -102,7 +102,7 @@
       <div id="guy-container" class="mdc-toolbar-fixed-adjust">
         <img class="guy" src="/images/guy_fireats.png" />
         <div class="text">
-          This restaurant has no ratings.<br />
+          This user has no ratings.<br />
         </div>
         <br />
         <a class="mdc-button" data-fir-click="add_mock_data">
@@ -131,7 +131,7 @@
     </div>
   </div>
 
-  <div hidden class="template" id="restaurant-header">
+  <div hidden class="template" id="user-header">
     <header class="mdc-layout__header mdc-layout__header--transparent" data-fir-style="backgroundImage:photo">
 
       <div class="mdc-layout-grid" style="width: 100%;">
@@ -175,19 +175,19 @@
     </div>
   </div>
 
-  <div hidden class="template mdc-layout-grid__cell mdc-layout-grid__cell--span-4" id="restaurant-card">
-    <div class="location-card mdc-card mdc-shadow--2dp" data-fir-click="go_to_restaurant">
-      <div class="mdc-card__title" data-fir-style="backgroundImage:photo"></div>
+  <div hidden class="template mdc-layout-grid__cell mdc-layout-grid__cell--span-4" id="user-card">
+    <div class="location-card mdc-card mdc-shadow--2dp" data-fir-click="go_to_user">
+      <!-- <div class="mdc-card__title" data-fir-style="backgroundImage:photo"></div> -->
       <div class="mdc-card__supporting-text">
-        <h2 data-fir-content="name">...</h2>
+        <h2 data-fir-content="DeviceName">...</h2>
         <span class="info price"></span>
         <div class="details">
-          <div class="rating"></div>
+          <div class=""></div>
         </div>
         <div class="details">
-          <span class="info" data-fir-content="category"></span>
+          <span class="info" data-fir-content="BatteryStatus"></span>
           <span class="light">●</span>
-          <span class="info" data-fir-content="city"></span>
+          <span class="info" data-fir-content="DeviceMaster"></span>
         </div>
 
       </div>

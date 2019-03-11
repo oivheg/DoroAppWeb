@@ -25,7 +25,7 @@ FriendlyEats.prototype.initTemplates = function() {
 };
 
 FriendlyEats.prototype.viewHome = function() {
-  this.getAllRestaurants();
+  this.getAllUsers();
 };
 
 FriendlyEats.prototype.viewList = function(filters, filter_description) {
@@ -64,15 +64,15 @@ FriendlyEats.prototype.viewList = function(filters, filter_description) {
     },
     display: function(doc) {
       var data = doc.data();
-      data['.id'] = doc.id;
-      data['go_to_restaurant'] = function() {
-        that.router.navigate('/restaurants/' + doc.id);
+      data['.id'] = doc.id ;
+      data['go_to_user'] = function() {
+        that.router.navigate('/Users/' + doc.id);
       };
   
-      var el = that.renderTemplate('restaurant-card', data);
-      el.querySelector('.rating').append(that.renderRating(data.avgRating));
+      var el = that.renderTemplate('user-card', data);
+      // el.querySelector('.rating').append(that.renderRating(data.avgRating));
       el.querySelector('.price').append(that.renderPrice(data.price));
-      // Setting the id allows to locating the individual restaurant card
+      // Setting the id allows to locating the individual user card
       el.querySelector('.location-card').id = 'doc-' + doc.id;
   
       var existingLocationCard = mainEl.querySelector('#doc-' + doc.id);
@@ -110,14 +110,14 @@ FriendlyEats.prototype.viewList = function(filters, filter_description) {
   };
 
   if (filters.city || filters.category || filters.price || filters.sort !== 'Rating' ) {
-    this.getFilteredRestaurants({
+    this.getFilteredUsers({
       city: filters.city || 'Any',
       category: filters.category || 'Any',
       price: filters.price || 'Any',
       sort: filters.sort
     }, renderer);
   } else {
-    this.getAllRestaurants(renderer);
+    this.getAllUsers(renderer);
   }
 
   var toolbar = mdc.toolbar.MDCToolbar.attachTo(document.querySelector('.mdc-toolbar'));
@@ -132,9 +132,9 @@ FriendlyEats.prototype.viewSetup = function() {
   });
 
   var config = this.getFirebaseConfig();
-  var noRestaurantsEl = this.renderTemplate('no-restaurants', config);
+  var noUsersEl = this.renderTemplate('no-users', config);
 
-  var button = noRestaurantsEl.querySelector('#add_mock_data');
+  var button = noUsersEl.querySelector('#add_mock_data');
   var addingMockData = false;
 
   var that = this;
@@ -147,17 +147,17 @@ FriendlyEats.prototype.viewSetup = function() {
     event.target.style.opacity = '0.4';
     event.target.innerText = 'Please wait...';
 
-    that.addMockRestaurants().then(function() {
+    that.addMockUsers().then(function() {
       that.rerender();
     });
   });
 
   this.replaceElement(document.querySelector('.header'), headerEl);
-  this.replaceElement(document.querySelector('main'), noRestaurantsEl);
+  this.replaceElement(document.querySelector('main'), noUsersEl);
 
   firebase
     .firestore()
-    .collection('restaurants')
+    .collection('Users')
     .limit(1)
     .onSnapshot(function(snapshot) {
       if (snapshot.size && !addingMockData) {
@@ -284,7 +284,7 @@ FriendlyEats.prototype.updateQuery = function(filters) {
   if (filters.category !== '') {
     query_description += filters.category + ' places';
   } else {
-    query_description += 'any restaurant';
+    query_description += 'any user';
   }
 
   if (filters.city !== '') {
@@ -327,7 +327,7 @@ FriendlyEats.prototype.viewRestaurant = function(id) {
         dialog.show();
       };
 
-      sectionHeaderEl = that.renderTemplate('restaurant-header', data);
+      sectionHeaderEl = that.renderTemplate('user-header', data);
       sectionHeaderEl
         .querySelector('.rating')
         .append(that.renderRating(data.avgRating));
@@ -420,7 +420,7 @@ FriendlyEats.prototype.render = function(el, data) {
     },
     'data-fir-content': function(tel) {
       var field = tel.getAttribute('data-fir-content');
-      tel.innerText = that.getDeepItem(data, field);
+      tel.innerText = that.getDeepItem(data, field) ;
     },
     'data-fir-click': function(tel) {
       tel.addEventListener('click', function() {
