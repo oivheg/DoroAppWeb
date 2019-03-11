@@ -1,19 +1,15 @@
-# FriendlyEats (Web)
+# DoroWebApp
 
 ## Introduction
 
-FriendlyEats is a user recommendation app built on Cloud Firestore.
-For more information about Firestore visit [the docs][firestore-docs].
+Profe of Consept using the FriendlyEats Sample app from Firebase
 
-This project is the starting point for the [Cloud Firestore Web Codelab][codelab],
-which will show you how to build the applications step-by-step. If you'd like to
-simply run the finished result, see the [quickstart app][quickstart].
 
 <img src="docs/finished_image.png" />
 
-## Setup
+## Based ON 
 
-Follow the [Cloud Firestore Web Codelab][codelab] to set up this sample.
+Follow the [Cloud Firestore Web Codelab][codelab] to see the sample .
 
 ## License
 
