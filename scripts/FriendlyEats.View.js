@@ -58,9 +58,36 @@ FriendlyEats.prototype.viewList = function(filters, filter_description) {
       var locationCardToDelete = mainEl.querySelector('#doc-' + doc.id);
       if (locationCardToDelete) {
         mainEl.querySelector('#cards').removeChild(locationCardToDelete.parentNode);
+        mainEl.querySelector('#cards2').removeChild(locationCardToDelete.parentNode);
       }
 
       return;
+    },
+    displayError: function(doc) {
+      var data = doc.data();
+      data['.id'] = doc.id ;
+      data['go_to_user'] = function() {
+        that.router.navigate('/Users/' + doc.id);
+      };
+  
+      var el = that.renderTemplate('user-card', data);
+      // el.querySelector('.rating').append(that.renderRating(data.avgRating));
+      el.querySelector('.price').append(that.renderPrice(data.price));
+      // Setting the id allows to locating the individual user card
+      el.querySelector('.location-card').id = 'doc-noResp-' + doc.id;
+  
+      var existingLocationCard = mainEl.querySelector('#doc-noResp-' + doc.id);
+      
+     
+      if (existingLocationCard) {
+        // modify
+        existingLocationCard.parentNode.before(el);
+        mainEl.querySelector('#cards #noResp').removeChild(existingLocationCard.parentNode);
+      } else {
+        // add
+        mainEl.querySelector('#cards #noResp').append(el);
+      }
+      
     },
     display: function(doc) {
       var data = doc.data();
@@ -76,13 +103,16 @@ FriendlyEats.prototype.viewList = function(filters, filter_description) {
       el.querySelector('.location-card').id = 'doc-' + doc.id;
   
       var existingLocationCard = mainEl.querySelector('#doc-' + doc.id);
+     
       if (existingLocationCard) {
         // modify
         existingLocationCard.parentNode.before(el);
-        mainEl.querySelector('#cards').removeChild(existingLocationCard.parentNode);
+        mainEl.querySelector('#cards #resp').removeChild(existingLocationCard.parentNode);
+        // mainEl.querySelector('#cards').removeChild(existingLocationCard.parentNode);
       } else {
         // add
-        mainEl.querySelector('#cards').append(el);
+        mainEl.querySelector('#cards #resp').append(el);
+        // mainEl.querySelector('#cards').append(el);
       }
     },
     empty: function() {

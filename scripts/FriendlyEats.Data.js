@@ -24,7 +24,7 @@ FriendlyEats.prototype.addRestaurant = function(data) {
 FriendlyEats.prototype.getAllUsers = function(renderer) {
   var query = firebase.firestore()
   .collection('Users')
-  .orderBy('Responding')
+  .orderBy('DeviceName')
   .limit(50);
 
 this.getDocumentsInQuery(query, renderer);
@@ -38,15 +38,22 @@ FriendlyEats.prototype.getDocumentsInQuery = function(query, renderer) {
     snapshot.docChanges().forEach(function(change) {
       if (change.type === 'removed') {
         renderer.remove(change.doc);
-      } else {
+      } else if (change.type === 'modified'){
       
-        renderer.display(change.doc);
-
+      
+        // location.reload();
+       
+      }else{
+         renderer.display(change.doc);
+        // renderer.displayError(change.doc);
         if (!change.doc.data().Responding) {
-            document.getElementById('doc-' + change.doc.id).style.backgroundColor = "Red"
-
-        }
+           renderer.displayError(change.doc);
+           document.getElementById('doc-' + change.doc.id).style.backgroundColor = "Red";
+          document.getElementById('doc-noResp-' + change.doc.id).style.backgroundColor = "Red";
+         
+         }
       }
+      
     });
   });
 };
