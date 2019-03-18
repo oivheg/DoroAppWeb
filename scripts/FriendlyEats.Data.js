@@ -21,14 +21,43 @@ FriendlyEats.prototype.addRestaurant = function(data) {
   */
 };
 
+var MasterID;
 FriendlyEats.prototype.getAllUsers = function(renderer) {
+
+  var user = firebase.auth().currentUser;
+var query = firebase.firestore()
+.collection('Masters')
+.where("email", "==", user.email);
+// .orderBy('Email')
+// .limit(50);
+
+
+
+this.getMasterInQuery(query, renderer);
+
+
+
+//   var query = firebase.firestore()
+//   .collection('Users')
+//   .orderBy('DeviceName')
+//   .where("DeviceMaster", "==", MasterID)
+//   .limit(50);
+
+// this.getDocumentsInQuery(query, renderer);
+
+};
+
+function GetDocuments() {
   var query = firebase.firestore()
   .collection('Users')
   .orderBy('DeviceName')
+  .where("DeviceMaster", "==", MasterID)
   .limit(50);
 
 this.getDocumentsInQuery(query, renderer);
-};
+}
+
+
 
 FriendlyEats.prototype.getDocumentsInQuery = function(query, renderer) {
   query.onSnapshot(function(snapshot) {
@@ -36,25 +65,75 @@ FriendlyEats.prototype.getDocumentsInQuery = function(query, renderer) {
     
    
     snapshot.docChanges().forEach(function(change) {
+     
+      
       if (change.type === 'removed') {
         renderer.remove(change.doc);
-      } else if (change.type === 'modified'){
+      }
+      //  else if (change.type === 'modified'){
+      //   console.log(change.type);
       
-      
-        // location.reload();
+      //   if (change.doc.data().Responding) {
        
-      }else{
+      //     renderer.removeError(change.doc);
+        
+      //   }
+      //   //  location.reload();
+
+       
+      // }
+      else{
          renderer.display(change.doc);
-        // renderer.displayError(change.doc);
+         renderer.removeError(change.doc);
+         document.getElementById('doc-' + change.doc.id).style.backgroundColor =  "lightgreen";
+        
+      
         if (!change.doc.data().Responding) {
+       
            renderer.displayError(change.doc);
-           document.getElementById('doc-' + change.doc.id).style.backgroundColor = "Red";
+           document.getElementById('doc-' + change.doc.id).style.backgroundColor = "Grey";
           document.getElementById('doc-noResp-' + change.doc.id).style.backgroundColor = "Red";
          
          }
       }
       
     });
+  });
+};
+
+FriendlyEats.prototype.getMasterInQuery = function(query, renderer) {
+  query.onSnapshot(function(snapshot) {
+    if (!snapshot.size) return renderer.empty(); // Display "There are no users".
+    
+   
+    snapshot.docChanges().forEach(function(change) {
+     
+
+      console.log("Document data:",change.doc.data());
+      var data = change.doc.data();
+
+      MasterID = data['MasterID']
+
+      console.log("Document data:",MasterID);
+
+      
+  // var mstrid = change.doc.data().doc.MasterID
+
+        //  renderer.display(change.doc);
+        
+        
+      
+        
+    
+      
+    });
+    var query = firebase.firestore()
+    .collection('Users')
+    .orderBy('DeviceName')
+    .where("DeviceMaster", "==", MasterID)
+    .limit(50);
+  
+    FriendlyEats.prototype.getDocumentsInQuery(query, renderer);
   });
 };
 

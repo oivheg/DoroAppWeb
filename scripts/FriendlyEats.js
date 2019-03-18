@@ -13,11 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+
 'use strict';
 
 /**
  * Initializes the FriendlyEats app.
  */
+
+
+
+
+
+
 function FriendlyEats() {
   this.filters = {
     city: '',
@@ -31,14 +39,44 @@ function FriendlyEats() {
   firebase.firestore().settings({ timestampsInSnapshots: true });
 
   var that = this;
-  firebase.auth().signInAnonymously().then(function() {
-    that.initTemplates();
-    that.initRouter();
-    that.initReviewDialog();
-    that.initFilterDialog();
-  }).catch(function(err) {
-    console.log(err);
+  //  firebase.auth().signInAnonymously().then(function() {
+   // firebase.auth().signInWithEmailAndPassword("oivheg@gmail.com", "password").then(function() {
+    // that.initTemplates();
+    // that.initRouter();
+    // that.initReviewDialog();
+    //  that.initFilterDialog();
+  // }).catch(function(err) {
+  //   console.log(err);
+  // });
+
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      that.initTemplates();
+      that.initRouter();
+      that.initReviewDialog();
+       that.initFilterDialog();
+    }else{
+
+    }
+ 
+   
   });
+
+ 
+     
+  
+
+ 
+
+}
+
+
+
+
+// Initiate firebase auth.
+function initFirebaseAuth() {
+  // Listen to auth state changes.
+  firebase.auth().onAuthStateChanged(authStateObserver);
 }
 
 /**

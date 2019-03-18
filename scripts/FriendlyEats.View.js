@@ -15,6 +15,8 @@
  */
 'use strict';
 
+
+
 FriendlyEats.prototype.initTemplates = function() {
   this.templates = {};
 
@@ -57,8 +59,15 @@ FriendlyEats.prototype.viewList = function(filters, filter_description) {
     remove: function(doc) {
       var locationCardToDelete = mainEl.querySelector('#doc-' + doc.id);
       if (locationCardToDelete) {
-        mainEl.querySelector('#cards').removeChild(locationCardToDelete.parentNode);
-        mainEl.querySelector('#cards2').removeChild(locationCardToDelete.parentNode);
+        mainEl.querySelector('#cards #resp').removeChild(locationCardToDelete.parentNode);
+      }
+
+      return;
+    },
+    removeError: function(doc) {
+      var locationCardToDelete = mainEl.querySelector('#doc-noResp-'+ doc.id);
+      if (locationCardToDelete) {
+        mainEl.querySelector('#cards #noResp').removeChild(locationCardToDelete.parentNode);
       }
 
       return;
@@ -168,19 +177,36 @@ FriendlyEats.prototype.viewSetup = function() {
   var addingMockData = false;
 
   var that = this;
+  // button.addEventListener('click', function(event) {
+  //   if (addingMockData) {
+  //     return;
+  //   }
+  //   addingMockData = true;
+
+  //   event.target.style.opacity = '0.4';
+  //   event.target.innerText = 'Please wait...';
+
+  //   that.addMockUsers().then(function() {
+  //     that.rerender();
+  //   });
+  // });
+
   button.addEventListener('click', function(event) {
-    if (addingMockData) {
-      return;
-    }
-    addingMockData = true;
-
-    event.target.style.opacity = '0.4';
-    event.target.innerText = 'Please wait...';
-
-    that.addMockUsers().then(function() {
-      that.rerender();
-    });
+   
   });
+
+  // Signs-in Friendly Chat.
+function signIn() {
+  // Sign in Firebase using popup auth and Google as the identity provider.
+  var provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider);
+}
+
+// Signs-out of Friendly Chat.
+function signOut() {
+  // Sign out of Firebase.
+  firebase.auth().signOut();
+}
 
   this.replaceElement(document.querySelector('.header'), headerEl);
   this.replaceElement(document.querySelector('main'), noUsersEl);
